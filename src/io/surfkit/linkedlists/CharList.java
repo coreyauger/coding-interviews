@@ -1,13 +1,14 @@
 package io.surfkit.linkedlists;
 
-public class List{
+
+public class CharList{
     static class Node{
-        Node(int item){ data = item; }
+        Node(char item){ data = item; }
         public Node next;
-        public int data;
+        public char data;
     }
-    List( int item ){ head = new Node(item); }
-    List( int[] items ){
+    CharList( char item ){ head = new Node(item); }
+    CharList( char[] items ){
         head = new Node(items[0]);
         Node iter = head;
         for( int i=1; i<items.length; i++){
@@ -32,6 +33,3 @@ public class List{
         return str.toString();
     }
 }
-
-
-
