@@ -29,6 +29,25 @@ public class Question1_9 {
         return false;
     }
 
+    public static boolean isStringRotation2( String str1, String str2 ){
+        for( int i=0; i<str2.length(); i++){
+            if( str2.charAt(i) == str1.charAt(0) ){
+                String[] split = str2.split( str2.charAt(i) + "" );
+                String first = str2.charAt(i) + split[1];
+                Boolean same = true;
+                for(int j=0; j<first.length(); j++){
+                    if( str1.charAt(j) != first.charAt(j) ){
+                        same = false;
+                        break;
+                    }
+                }
+                if(same)return str1.equals(first + split[0]);
+            }
+        }
+        return false;
+    }
+
+
 
     public static void main(String[] args) {
         String s1 = "waterbottle";
@@ -50,7 +69,7 @@ public class Question1_9 {
         for (String[] pair : pairs) {
             String word1 = pair[0];
             String word2 = pair[1];
-            boolean is_rotation = isStringRotation(word1, word2);
+            boolean is_rotation = isStringRotation2(word1, word2);
             System.out.println(word1 + ", " + word2 + ": " + is_rotation);
 
         }

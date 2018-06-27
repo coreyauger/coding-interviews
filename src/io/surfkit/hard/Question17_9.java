@@ -53,13 +53,44 @@ public class Question17_9 {
     }
 
 
+    public static Integer[] kthMultiple2( int k ){
+        ArrayList<Integer> set = new ArrayList<>();
+        set.add(1);
+        for( int i1=1; i1<=k/3; i1++){
+            int pow3 = (int)Math.pow(3, i1);
+            set.add(pow3);
+            for( int i2=1; i2<=k/5; i2++){
+                int pow5 = (int)Math.pow(5, i2);
+                set.add(pow5);
+                set.add(pow5 * pow3);
+                for( int i3=1; i3<=k/7; i3++){
+                    int pow7 = (int)Math.pow(7, i3);
+                    set.add(pow7);
+                    set.add(pow7 * pow5);
+                    set.add(pow7 * pow3);
+                    set.add(pow7 * pow3 * pow5);
+                }
+            }
+
+        }
+        Set<Integer> dedup = new HashSet(set);
+        Integer[] xs = dedup.toArray(new Integer[dedup.size()]);
+        Arrays.sort(xs);
+        return xs;
+    }
+
 
 
     public static void main(String[] args) {
         List<Integer> multiples = kthMultiple(15);
 
-        System.out.println("MULTIPLES");
+        System.out.println("\nMULTIPLES");
         for(Integer i : multiples)System.out.print(i +", ");
+
+        Integer[] multiples2 = kthMultiple2(15);
+
+        System.out.println("\nMULTIPLES");
+        for(Integer i : multiples2)System.out.print(i +", ");
 
     }
 
