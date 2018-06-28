@@ -6,6 +6,7 @@ import java.util.*;
 public class Question17_8 {
 
 
+
     public static class Person{
         public int height;
         public int weight;
@@ -35,6 +36,29 @@ public class Question17_8 {
         return largestTower(people, new Person(Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
+    public static HashMap<Person, ArrayList<Person>> cache = new HashMap<>();
+
+    public static ArrayList<Person> largestTowerCache( Person[] people, Person top ){
+        ArrayList<Person> largest = new ArrayList();
+        for( Person p : people){
+            if( p.height < top.height && p.weight < top.weight ){
+                ArrayList x;
+                if( !cache.containsKey(p)){
+                    x = largestTowerCache( people, p );
+                    x.add(p);
+                    cache.put(p, x);
+                }
+                x = cache.get(p);
+                if( x.size() > largest.size() )largest = x;
+            }
+        }
+        return largest;
+    }
+
+    public static ArrayList<Person> largestTowerCache( Person[] people ){
+        return largestTowerCache(people, new Person(Integer.MAX_VALUE, Integer.MAX_VALUE));
+    }
+
 
 /*
  (56, 90) (60,95) (65,100) (68,110) (70,150) (75,190)
@@ -54,6 +78,11 @@ public class Question17_8 {
         ArrayList<Person> stack = largestTower(poeple);
         System.out.println("largest stack is: " + stack.size());
         for(Person p: stack)System.out.println(p);
+
+
+        ArrayList<Person> stack2 = largestTowerCache(poeple);
+        System.out.println("\n\nlargest stack is: " + stack2.size());
+        for(Person p: stack2)System.out.println(p);
     }
 
 
